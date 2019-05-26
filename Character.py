@@ -12,7 +12,7 @@ class Character:
             A Character object.
         character : str, int
             The character to be incapsulated into a Character object. If an integer is provided, it will be automatically converted into a Character.
-        previous_character : Character
+        previous_character : Character (default = None)
             The parent "Node". A TypeError Exception will be raised if an object of another type is provided.
         *args : str, int
             All remaining parameters eventually provided will be interpreted as next_characters (sons), will be incapsulated into Characters if needed and appended as sons of the current character..
