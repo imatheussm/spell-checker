@@ -15,7 +15,7 @@ class Character:
         previous_character : Character (default = None)
             The parent "Node". A TypeError Exception will be raised if an object of another type is provided.
         *args : str, int
-            All remaining parameters eventually provided will be interpreted as next_characters (sons), will be incapsulated into Characters if needed and appended as sons of the current character..
+            All remaining parameters eventually provided will be interpreted as next_characters (sons), will be incapsulated into Characters if needed and appended as sons of the current character.
         Returns
         -------
         Character
