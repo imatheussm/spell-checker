@@ -56,6 +56,21 @@ class CharacterTree(Character):
 				for item in arg: self.insert(item)
 			else: self.insert(arg)
 
+	def __repr__(self):
+		"""Representation of the CharacterTree object.
+
+		Parameters
+		----------
+		self : CharacterTree
+			A CharacterTree object.
+
+		Returns
+		-------
+		str
+			The string representation of the object.
+		"""
+		return "<CharacterTree object>\nAvailable Initial Characters: {}".format(", ".join([character.character for character in self.next_characters]))
+
 	def insert(self,word):
 		"""Inserts a word in the CharacterTree.
 
@@ -73,7 +88,7 @@ class CharacterTree(Character):
 			if str(i) in word: raise ValueError("Non-allowed characters were found in the word. Did your word contain any number or \"*\" as a character?")
 		pointer = self
 		for letter in word:
-			if word in pointer.next_characters: pointer = pointer.next_characters[pointer.next_characters.index(letter)]
+			if letter in pointer.next_characters: pointer = pointer.next_characters[pointer.next_characters.index(letter)]
 			else:
 				pointer.next_characters.append(Character(letter,pointer))
 				pointer = pointer.next_characters[pointer.next_characters.index(letter)]
