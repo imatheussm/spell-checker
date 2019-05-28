@@ -11,20 +11,24 @@ class CharacterTree(Character):
 	def __contains__(self,other):
 		"""
 		"""
-		if isinstance(other,int): return False
 		if isinstance(other,str):
 			pointer = self
 			for letter in other:
 				if letter in pointer.next_characters: pointer = pointer.next_characters[pointer.next_characters.index(letter)]
 				else: return False
 			return pointer.is_final
+		else:
+			return False
 
 	def __init__(self,*args):
 		"""
 		"""
 		super().__init__('*')
 		self.is_final = True
-		for arg in args: self.insert(arg)
+		for arg in args:
+			if isinstance(arg,list) or isinstance(arg,tuple):
+				for item in arg: self.insert(item)
+			else: self.insert(arg)
 
 	def insert(self,word):
 		"""
