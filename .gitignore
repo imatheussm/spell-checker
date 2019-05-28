@@ -6,3 +6,4 @@
 .vs/VSWorkspaceState.json
 .vs/spell-checker/v16/.suo
 __pycache__/Character.cpython-37.pyc
+*.pyc
