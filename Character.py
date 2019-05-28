@@ -3,7 +3,7 @@ class Character:
 
     Contains references to the sons (if any) and the father. The paths are the existing words.
     """
-    def __init__(self,character,previous_character=None,*args):
+    def __init__(self,character,previous_character = None,*args):
         """Class builder.
 
         Parameters
