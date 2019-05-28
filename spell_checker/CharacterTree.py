@@ -91,7 +91,9 @@ class CharacterTree(Character):
 			if letter in pointer.next_characters: pointer = pointer.next_characters[pointer.next_characters.index(letter)]
 			else:
 				pointer.next_characters.append(Character(letter,pointer))
-				pointer = pointer.next_characters[pointer.next_characters.index(letter)]
+				for index in range(len(pointer.next_characters)):
+					if pointer.next_characters[index].character==letter: pointer = pointer.next_characters[index]
+					break
 		pointer.is_final = True
 
 	def remove(self,word):
