@@ -75,7 +75,7 @@ class Character:
 		"""
 		if isinstance(character,int) or isinstance(character,Character): character = str(character)
 		if not isinstance(character,str) or len(character) != 1: raise ValueError("A Character object can hold only one character.")
-		self.character = character.lower()
+		self.character = character#.lower()
 		if previous_character != None and not isinstance(previous_character,Character): raise TypeError("The previous character must be a Character object as well.")
 		else: self.previous_character = previous_character
 		self.next_characters = sorted([Character(arg) for arg in args if isinstance(arg,str) and len(arg) == 1])
