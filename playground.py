@@ -15,7 +15,7 @@ print("A palavra aba adicionada.")
 print("Há aba na árvore? Resposta: {}.".format("aba" in a))
 print("Perfeito.")
 
-print(", ".join([character.character for character in ct.next_characters]))
+print(", ".join([character.character for character in a.next_characters]))
 
 #print("\n\n")
 
