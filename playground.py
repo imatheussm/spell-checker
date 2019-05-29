@@ -15,5 +15,4 @@ print("Há aba na árvore? Resposta: {}.".format("aba" in a))
 print("Perfeito.")
 
 ct = from_csv("D:\igor\OneDrive\Documentos\GitHub\spell-checker\palavras_sample.txt")
-a_list = [character.character for character in ct.next_characters[0].next_characters]
-print(", ".join(a_list))
+print(", ".join([character.character for character in ct.next_characters]))
