@@ -36,12 +36,10 @@ def words(data,case_sensitive=True):
 	CharacterTree
 		A CharacterTree object with the words of the file loaded.
 	"""
-	lines = iter(data)
+	words = iter(data)
 	if case_sensitive==True:
-		for line in lines:
-			for word in line.split():
-				if word.isalpha(): yield word
+		for word in words:
+			yield word.strip("\n")
 	else:
-		for line in lines:
-			for word in line.lower().split():
-				if word.isalpha(): yield word
+		for word in words:
+			yield word.lower().strip("\n")
