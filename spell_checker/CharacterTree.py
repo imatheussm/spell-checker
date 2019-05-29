@@ -51,6 +51,7 @@ class CharacterTree(Character):
 		"""
 		super().__init__('*')
 		self.is_final = True
+		self.loaded_words = 0
 		for arg in args:
 			if isinstance(arg,list) or isinstance(arg,tuple):
 				for item in arg: self.insert(item)
@@ -92,9 +93,13 @@ class CharacterTree(Character):
 			else:
 				pointer.next_characters.append(Character(letter,pointer))
 				for index in range(len(pointer.next_characters)):
-					if pointer.next_characters[index].character==letter: pointer = pointer.next_characters[index]
-					break
-		pointer.is_final = True
+					if pointer.next_characters[index].character==letter:
+						pointer = pointer.next_characters[index]
+						break
+		if pointer.is_final == False:
+			pointer.is_final = True
+			self.loaded_words += 1
+		else: raise ValueError("Provided word ({}) already exists in this CharacterTree object.".format(word))
 
 	def remove(self,word):
 		"""Removes a word from the CharacterTree.
@@ -120,3 +125,4 @@ class CharacterTree(Character):
 				previous_pointer = pointer.previous_character
 				previous_character.next_characters.remove(pointer)
 				pointer = previous_pointer
+		self.loaded_words-=1
