@@ -70,7 +70,8 @@ class CharacterTree(Character):
 		str
 			The string representation of the object.
 		"""
-		return "<CharacterTree object>\nAvailable Initial Characters: {}".format(", ".join([character.character for character in self.next_characters]))
+		return "<CharacterTree object>\n{} words loaded.\nAvailable Initial Characters: {}".format(self.loaded_words,
+																								   ", ".join([character.character for character in self.next_characters]))
 
 	def check(self,path):
 		"""Checks a text for mis-spellings.
@@ -92,7 +93,6 @@ class CharacterTree(Character):
 			for word in [line.strip("\n").split(" ") for line in file.readlines()]:
 				if word[0] not in self: misspellings.append(word)
 		return misspellings
-			#return tuple([word for word in [word.strip('\n').split(" ") for word in iter(file)] if word not in self])
 
 
 	def insert(self,word):
