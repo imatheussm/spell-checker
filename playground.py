@@ -46,7 +46,7 @@ print("\n\n")
 print("Comparing execution times: ",end="")
 
 start_time = time()
-ct = from_csv("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras.txt")
+ct = from_dict("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras.txt")
 low_memory_time = time() - start_time
 print("{}".format(str(low_memory_time)))
 
