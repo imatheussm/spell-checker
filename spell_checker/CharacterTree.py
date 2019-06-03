@@ -72,6 +72,29 @@ class CharacterTree(Character):
 		"""
 		return "<CharacterTree object>\nAvailable Initial Characters: {}".format(", ".join([character.character for character in self.next_characters]))
 
+	def check(self,path):
+		"""Checks a text for mis-spellings.
+
+		Parameters
+		----------
+		self : CharacterTree
+			A CharacterTree object.
+		path : str (path)
+			The path to the file to be spell-checked.
+
+		Returns
+		-------
+		tuple
+			A tuple containing all the unknown words.
+		"""
+		with open(path, "r", encoding="utf-8") as file:
+			misspellings = []
+			for word in [line.strip("\n").split(" ") for line in file.readlines()]:
+				if word[0] not in self: misspellings.append(word)
+		return misspellings
+			#return tuple([word for word in [word.strip('\n').split(" ") for word in iter(file)] if word not in self])
+
+
 	def insert(self,word):
 		"""Inserts a word in the CharacterTree.
 
