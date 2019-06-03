@@ -1,13 +1,15 @@
 from spell_checker.CharacterTree import *
 #from random import random
 
-def from_dict(data,low_memory=True):
-	"""Convert a CSV file into a CharacterTree object.
+def from_dict(data,character_tree=None,low_memory=True):
+	"""Convert files with one word per line into a CharacterTree object.
 
 	Parameters
 	----------
-	data : str
-		The path to a .txt file containing words to be loaded into the CharacterTree to be returned. There must be a word per line.
+	data : str (path)
+		The path to a file containing words to be loaded into the CharacterTree to be returned. There must be a word per line.
+	character_tree : bool (default = None)
+		The CharacterTree object in which the words are meant to be loaded. If not provided, will create a new CharacterTree object.
 	low_memory : bool (default = True)
 		In hopes of mitigating the load time without multi-threading nor other advanced stuff, this parameter was created. The idea was that if I loaded all words in memory instead of working with them one-at-a-time through the word_generator() generator, the processing time would decrease. In reality, though, after some testing the result was actually the opposite: when low_memory was set to True, the average processing time slightly increased.
 
@@ -16,17 +18,39 @@ def from_dict(data,low_memory=True):
 	CharacterTree
 		A CharacterTree object containing the loaded words provided.
 	"""
-	character_tree = CharacterTree()
+	if character_tree == None: character_tree = CharacterTree()
+	elif not isinstance(character_tree,CharacterTree): raise TypeError("Parameter character_tree must be a CharacterTree object.")
 	with open (data,"r",encoding="utf-8") as file:
 		if low_memory == True:
 			for word in word_generator(file):
 				#if random()<0.1: print(word)
 				character_tree.insert(word)
 		else:
-			words = file.readlines()
-			words = [word.strip("\n") for word in words]
-			for word in words:
-				character_tree.insert(word)
+			for word in [word.strip("\n") for word in file.readlines()]: character_tree.insert(word)
+	return character_tree
+
+def from_txt(data,character_tree=None):
+	"""Loads words into a CharacterTree from the text file provided.
+
+	Parameters
+	----------
+	data : str (path)
+		The path to a text file containing words to be loaded into the CharacterTree to be returned.
+	character_tree : bool (default = None)
+		The CharacterTree object in which the words are meant to be loaded. If not provided, will create a new CharacterTree object.
+
+	Returns
+	-------
+	CharacterTree
+		A CharacterTree object containing the loaded words.
+	"""
+	if character_tree == None: character_tree = CharacterTree()
+	elif not isinstance(character_tree,CharacterTree): raise TypeError("Parameter character_tree must be a CharacterTree object.")
+	with open (data,"r",encoding="utf-8") as file:
+		lines, words = [word.strip("\n") for word in file.readlines()], []
+		for line in lines:
+			for word in line.split(" "):
+				if word.isalpha(): character_tree.insert(word)
 	return character_tree
 
 def word_generator(data,case_sensitive=True):
