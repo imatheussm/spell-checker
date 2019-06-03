@@ -1,4 +1,5 @@
 from spell_checker.CharacterTree import *
+from string import punctuation
 #from random import random
 
 def from_dict(data,character_tree=None,low_memory=True):
@@ -50,7 +51,11 @@ def from_txt(data,character_tree=None):
 		lines, words = [word.strip("\n") for word in file.readlines()], []
 		for line in lines:
 			for word in line.split(" "):
-				if word.isalpha(): character_tree.insert(word)
+				word = ''.join(character for character in word if character not in punctuation)
+				#print(word)
+				if word.isalpha():
+					try: character_tree.insert(word)
+					except: pass
 	return character_tree
 
 def word_generator(data,case_sensitive=True):
