@@ -45,16 +45,21 @@ print("\n\n")
 
 print("Comparing execution times: ",end="")
 
+#start_time = time()
+#ct = from_dict("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras.txt")
+#elapsed = time() - start_time
+#print("{}".format(str(elapsed)))
+
 start_time = time()
-ct = from_dict("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras.txt")
-low_memory_time = time() - start_time
-print("{}".format(str(low_memory_time)))
+constituicao = from_txt("D:/igor/OneDrive/Documentos/GitHub/spell-checker/texts/constituicao.txt")
+elapsed = time() - start_time
+print("{}".format(str(elapsed)))
 
 #sample_file("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras.txt",
 #			"D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras_sample1.txt")
 
 #wrong_words = ct.check("./texts/A-Caravana-de-Veneza.txt")
-wrong_words = ct.check("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras_sample1.txt")
+#wrong_words = ct.check("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras_sample1.txt")
 
 #print("low_memory=True:",end="")
 #start_time = time()
