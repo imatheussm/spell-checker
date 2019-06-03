@@ -7,9 +7,5 @@
 .vs/spell-checker/v16/.suo
 __pycache__/Character.cpython-37.pyc
 *.pyc
-palavras_sample.txt
-palavras.txt
-palavras_sample_longas.txt
 .ipynb_checkpoints/spell_checker-checkpoint.ipynb
 .ipynb_checkpoints/playground-checkpoint.py
-dictionaries/palavras_sample1.txt
