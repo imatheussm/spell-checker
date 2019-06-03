@@ -14,7 +14,7 @@ def from_csv(data,low_memory=True):
 	Returns
 	-------
 	CharacterTree
-		A CharacterTree object containing the loaded words.
+		A CharacterTree object containing the loaded words provided.
 	"""
 	character_tree = CharacterTree()
 	with open (data,"r",encoding="utf-8") as file:
