@@ -6,6 +6,17 @@ sys_path.append(getcwd())
 from spell_checker import *
 
 def sample_file(path,new_path,percentage=.20):
+	"""Randomly selects lines from files.
+
+	Parameters
+	----------
+	path : str (path)
+		The path of the file to be sampled.
+	new_path : str (path)
+		The path of the file to be created with the chosen lines.
+	percentage : float (default = .20)
+		The percentage of lines to be chosen.
+	"""
 	sample = []
 	with open(path,"r",encoding="utf-8") as file:
 		line = file.readline()
@@ -14,8 +25,7 @@ def sample_file(path,new_path,percentage=.20):
 			line = file.readline()
 
 	with open(new_path,"w",encoding="utf-8") as file:
-		for item in sample:
-			file.write(item)
+		for item in sample: file.write(item)
 
 a = CharacterTree("abacate","mamão","maniçoba","queijo")
 print("Árvore criada com as palavras \"abacate\", \"mamão\",\"maniçoba\" e \"queijo\" nela.")
