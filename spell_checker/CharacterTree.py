@@ -2,6 +2,7 @@ from os import getcwd
 from sys import path as sys_path
 sys_path.append(getcwd())
 from spell_checker.Character import *
+from time import sleep
 
 class CharacterTree(Character):
 	"""Tree of letters, where each path, if final, represents a word.
@@ -56,6 +57,14 @@ class CharacterTree(Character):
 			if isinstance(arg,list) or isinstance(arg,tuple):
 				for item in arg: self.insert(item)
 			else: self.insert(arg)
+
+	def __iter__(self,current_word=[],next_characters=None):
+		"""Iterator capability of CharacterTree.
+
+		Serves to deliver all the words in the CharacterTree.
+		"""
+		if next_characters == None: next_characters = self.next_characters
+		raise NotImplementedError("I have been facing some difficulties with this. I'll leave this to tomorrow.")
 
 	def __repr__(self):
 		"""Representation of the CharacterTree object.
