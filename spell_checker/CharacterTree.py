@@ -1,6 +1,3 @@
-from os import getcwd
-from sys import path as sys_path
-sys_path.append(getcwd())
 from spell_checker.Character import *
 from time import sleep
 
@@ -52,7 +49,7 @@ class CharacterTree(Character):
 		"""
 		super().__init__('*')
 		self.is_final = True
-		self.loaded_words = 0
+		self.loaded_words = 1
 		for arg in args:
 			if isinstance(arg,list) or isinstance(arg,tuple):
 				for item in arg: self.insert(item)
