@@ -45,10 +45,10 @@ print("\n\n")
 
 print("Comparing execution times: ",end="")
 
-start_time = time()
-ct = from_dict("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras_sample.txt")
-elapsed = time() - start_time
-print("{}".format(str(elapsed)))
+#start_time = time()
+#ct = from_dict("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras_sample.txt")
+#elapsed = time() - start_time
+#print("{}".format(str(elapsed)))
 
 #start_time = time()
 #constituicao = from_txt("D:/igor/OneDrive/Documentos/GitHub/spell-checker/texts/constituicao.txt")
