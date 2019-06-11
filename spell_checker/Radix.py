@@ -97,7 +97,7 @@ class Radix:
 		if previous_radix != None and not isinstance(previous_radix,Radix): raise TypeError("The previous radix must be a Radix object as well.")
 		else: self.previous_radix = previous_radix
 		self.next_radices = sorted([Radix(arg) for arg in args if isinstance(arg,str)])
-		self.is_final = False
+		self.is_final = True
 
 	def __lt__(self,other):
 		"""Compares the characters incapsulated in the Radix classes, disregarding the previous and next ones.
