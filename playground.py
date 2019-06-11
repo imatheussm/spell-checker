@@ -42,7 +42,7 @@ print(", ".join([character.character for character in a.next_characters]))
 
 print("\n\n")
 
-b = RadixTree("abacate","mamão","maniçoba","queijo")
+#b = RadixTree("abacate","mamão","maniçoba","queijo","menino")
 
 
 #print("Comparing execution times: ",end="")
