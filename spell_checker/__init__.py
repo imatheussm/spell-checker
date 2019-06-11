@@ -1,5 +1,7 @@
 from spell_checker.CharacterTree import *
+from spell_checker.RadixTree import *
 from string import punctuation
+from spell_checker.misc import *
 #from random import random
 
 def from_dict(data,character_tree=None,low_memory=True):
