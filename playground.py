@@ -42,9 +42,10 @@ print(", ".join([character.character for character in a.next_characters]))
 
 print("\n\n")
 
+b = RadixTree("abacate","mamão","maniçoba","queijo")
 
-print("Comparing execution times: ",end="")
 
+#print("Comparing execution times: ",end="")
 #start_time = time()
 #ct = from_dict("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras_sample.txt")
 #elapsed = time() - start_time
