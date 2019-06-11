@@ -73,7 +73,7 @@ class RadixTree(Radix):
 			if radix in tree.next_characters[i]: return i
 		return -1
 
-	def insert(self,word,tree):
+	def insert(self,word,tree=None):
 		"""Inserts a word in the CharacterTree.
 
 		It will travel through the existing Character objects, appending new ones to the previous ones if needed, and will mark the last character of the word as final. In other words, for this final character, the is_final attribute will be set to true.
@@ -100,8 +100,39 @@ class RadixTree(Radix):
 		for i in list(range(10)) + ["*"]:
 			if str(i) in word: raise ValueError("Non-allowed characters were found in the word. Did your word contain any number or \"*\" as a character?")
 		#Finding the radix in the Tree among all the possibilities
-		pointer, next_radices, radices, result = self, [radix.radix for radix in self.next_radices], get_radices(word)[::-1], False
-		for radix in radices:
-			for i in range(next_radices):
-				pass
-		if result: self.find_radix(radix,pointer)
+		if tree==None:
+			#print("No tree was defined. Defining tree to be self...")
+			tree = self
+		#else: print("tree = {}".format(tree.radix))
+		if len(tree.next_radices)>0:
+			#print("There are children! Analyzing one-by-one...")
+			for next_radix in tree.next_radices:
+				#print("Current radix: {}".format(next_radix.radix))
+				for i in range(len(next_radix.radix)):
+					if next_radix.radix[i] != word[i]:
+						if i==0: break
+						else:
+							if len(word[i:])>0:
+								next_radix.radix = word[:i]
+								next_radix.is_final = False
+								return self.insert(word[i:],next_radix)
+							#else: raise Exception("The word {} has already been inserted!".format(word[:i]))
+			#print("None of the words are related! Appending...")
+			tree.next_radices.append(Radix(word,tree))
+		else:
+			#print("There are no children! Appending...")
+			tree.next_radices.append(Radix(word,tree))
+
+
+		#if len(word)>0:
+		#	tree, next_radices, radices, result = self, [radix.radix for radix in self.next_radices], get_radices(word)[::-1], False
+		#	for radix in radices:
+		#		for i in range(next_radices):
+		#			if radix in next_radices[i]:
+		#				result, radix = i, next_radices[i]
+		#				break
+		#		if result!=False: break
+		#	if result!=False:
+		#		return self.insert(word[len(radix):],tree.next_radices[result])
+		#	else:
+		#		tree.next_characters.append(Radix(word,tree))
