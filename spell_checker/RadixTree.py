@@ -101,26 +101,32 @@ class RadixTree(Radix):
 			if str(i) in word: raise ValueError("Non-allowed characters were found in the word. Did your word contain any number or \"*\" as a character?")
 		#Finding the radix in the Tree among all the possibilities
 		if tree==None:
-			#print("No tree was defined. Defining tree to be self...")
+			print("No tree was defined. Defining tree to be self...")
 			tree = self
-		#else: print("tree = {}".format(tree.radix))
+		else: print("tree = {} | word: {}".format(tree.radix,word))
 		if len(tree.next_radices)>0:
-			#print("There are children! Analyzing one-by-one...")
+			print("There are children! Analyzing one-by-one...")
 			for next_radix in tree.next_radices:
-				#print("Current radix: {}".format(next_radix.radix))
+				print("Current radix: {}".format(next_radix.radix))
+				# There's a problem with the discrepancy of lengths between the words!
 				for i in range(len(next_radix.radix)):
 					if next_radix.radix[i] != word[i]:
+						print("{} is not equal to {}!".format(next_radix.radix[i],word[i]))
 						if i==0: break
 						else:
 							if len(word[i:])>0:
+								print("There's a relation, but there's a suffix! Calling .insert()...\n")
+								next_radix.next_radices = [Radix(next_radix.radix[i:],next_radix,next_radix.next_radices)]
 								next_radix.radix = word[:i]
 								next_radix.is_final = False
 								return self.insert(word[i:],next_radix)
-							#else: raise Exception("The word {} has already been inserted!".format(word[:i]))
-			#print("None of the words are related! Appending...")
+							else: raise Exception("The word {} has already been inserted!".format(word[:i]))
+					else:
+						if i == len(next_radix.radix)-1: return self.insert(word[i:],next_radix)
+			print("None of the words are related! Appending...")
 			tree.next_radices.append(Radix(word,tree))
 		else:
-			#print("There are no children! Appending...")
+			print("There are no children! Appending...")
 			tree.next_radices.append(Radix(word,tree))
 
 
