@@ -21,7 +21,7 @@ class Radix(Character):
 			A Radix object.
 		"""
 		if isinstance(radix,int) or isinstance(radix,Character): radix = str(radix)
-		if not isinstance(radix,str) raise TypeError("A Radix object can hold only strings.")
+		if not isinstance(radix,str): raise TypeError("A Radix object can hold only strings.")
 		self.radix = radix#.lower()
 		if previous_radix != None and not isinstance(previous_radix,Radix): raise TypeError("The previous radix must be a Radix object as well.")
 		else: self.previous_radix = previous_radix
