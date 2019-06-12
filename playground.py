@@ -42,8 +42,9 @@ print(", ".join([character.character for character in a.next_characters]))
 
 print("\n\n")
 
-#b = RadixTree("abacate","mamão","maniçoba","queijo","menino")
-b = RadixTree("maniçoba","mamão")
+b = RadixTree("abacate","mamão","maniçoba","queijo","menino", "menina")
+# PROBLEM WITH COUNT OF WORDS
+# b.insert("menino")
 
 #print("Comparing execution times: ",end="")
 #start_time = time()
