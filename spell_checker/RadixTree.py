@@ -109,20 +109,27 @@ class RadixTree(Radix):
 			for next_radix in tree.next_radices:
 				print("Current radix: {}".format(next_radix.radix))
 				# There's a problem with the discrepancy of lengths between the words!
-				for i in range(len(next_radix.radix)):
-					if next_radix.radix[i] != word[i]:
-						print("{} is not equal to {}!".format(next_radix.radix[i],word[i]))
-						if i==0: break
+				try:
+					for i in range(len(next_radix.radix)):
+						if next_radix.radix[i] != word[i]:
+							print("{} is not equal to {}!".format(next_radix.radix[i],word[i]))
+							if i==0: break
+							else:
+								if len(word[i:])>0:
+									print("There's a relation, but there's a suffix! Calling .insert()...\n")
+									new_next_radices = next_radix.next_radices
+									print("new_next_radices: {}".format(new_next_radices))
+									print("new Radix object:\n{}".format(Radix(next_radix.radix[i:],next_radix,new_next_radices).__repr__()))
+									next_radix.next_radices = [Radix(next_radix.radix[i:],next_radix,new_next_radices)]
+									next_radix.radix = word[:i]
+									next_radix.is_final = False
+									del(new_next_radices)
+									return self.insert(word[i:],next_radix)
+								else: raise Exception("The word {} has already been inserted!".format(word[:i]))
 						else:
-							if len(word[i:])>0:
-								print("There's a relation, but there's a suffix! Calling .insert()...\n")
-								next_radix.next_radices = [Radix(next_radix.radix[i:],next_radix,next_radix.next_radices)]
-								next_radix.radix = word[:i]
-								next_radix.is_final = False
-								return self.insert(word[i:],next_radix)
-							else: raise Exception("The word {} has already been inserted!".format(word[:i]))
-					else:
-						if i == len(next_radix.radix)-1: return self.insert(word[i:],next_radix)
+							if i == len(next_radix.radix)-1: return self.insert(word[i+1:],next_radix)
+				except IndexError:
+					tree.is_final = True
 			print("None of the words are related! Appending...")
 			tree.next_radices.append(Radix(word,tree))
 		else:
