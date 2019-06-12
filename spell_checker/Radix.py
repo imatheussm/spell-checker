@@ -92,11 +92,26 @@ class Radix:
 			A Radix object.
 		"""
 		if isinstance(radix,int) or isinstance(radix,Character): radix = str(radix)
-		if not isinstance(radix,str): raise TypeError("A Radix object can hold only strings.")
+		elif not isinstance(radix,str): raise TypeError("A Radix object can hold only strings.")
 		self.radix = radix#.lower()
 		if previous_radix != None and not isinstance(previous_radix,Radix): raise TypeError("The previous radix must be a Radix object as well.")
 		else: self.previous_radix = previous_radix
-		self.next_radices = sorted([Radix(arg) for arg in args if isinstance(arg,str)])
+		self.next_radices = [Radix(arg,self) for arg in args if isinstance(arg,str)]
+		for arg in args:
+			if isinstance(arg,list) or isinstance(arg,tuple):
+				print("List found!")
+				for element in arg:
+					if isinstance(arg,str):
+						print("String found in the list! Appending...")
+						self.next_radices.append(Radix(element))
+					else:
+						try:
+							a, b, c = element.next_radices, element.radix, element.previous_radix
+							del(a,b,c)
+							print("Radix found in the list! Appending...")
+							self.next_radices.append(element)
+						except: pass
+		self.next_radices.sort()
 		self.is_final = True
 
 	def __lt__(self,other):
@@ -146,9 +161,9 @@ class Radix:
 		str
 			The representation of the Character object, containing the aforementioned characteristics.
 		"""
-		return "<Radix object>\n         Radix: {}\nPrevious Radix: {}\n  Next Radices: {}".format(self.radix,
-																												   self.previous_radix,
-																												   ", ".join([radix.radix for radix in self.next_radices]))
+		return "<Radix object>\nPrevious Radix: {}\n         Radix: {}\n  Next Radices: {}".format(self.previous_radix,
+																								   self.radix,
+																								   ", ".join([radix.radix for radix in self.next_radices]))
 
 
 	def __str__(self):
