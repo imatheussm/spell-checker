@@ -42,15 +42,15 @@ print(", ".join([character.character for character in a.next_characters]))
 
 print("\n\n")
 
-b = RadixTree("abacate","mamão","maniçoba","queijo","menino", "menina")
+#b = RadixTree("abacate","mamão","maniçoba","queijo","menino", "menina")
 # PROBLEM WITH COUNT OF WORDS
 # b.insert("menino")
 
-#print("Comparing execution times: ",end="")
-#start_time = time()
-#ct = from_dict("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras_sample.txt")
-#elapsed = time() - start_time
-#print("{}".format(str(elapsed)))
+print("Comparing execution times: ",end="")
+start_time = time()
+ct = from_dict("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras.txt", "RADIX") # 320140 palavras in CharacterTree.
+elapsed = time() - start_time
+print("{}".format(str(elapsed)))
 
 #start_time = time()
 #constituicao = from_txt("D:/igor/OneDrive/Documentos/GitHub/spell-checker/texts/constituicao.txt")
