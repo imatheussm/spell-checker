@@ -99,16 +99,16 @@ class Radix:
 		self.next_radices = [Radix(arg,self) for arg in args if isinstance(arg,str)]
 		for arg in args:
 			if isinstance(arg,list) or isinstance(arg,tuple):
-				print("List found!")
+				#print("List found!")
 				for element in arg:
 					if isinstance(arg,str):
-						print("String found in the list! Appending...")
+						#print("String found in the list! Appending...")
 						self.next_radices.append(Radix(element))
 					else:
 						try:
 							a, b, c = element.next_radices, element.radix, element.previous_radix
 							del(a,b,c)
-							print("Radix found in the list! Appending...")
+							#print("Radix found in the list! Appending...")
 							self.next_radices.append(element)
 						except: pass
 		self.next_radices.sort()
