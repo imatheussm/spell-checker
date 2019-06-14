@@ -48,7 +48,8 @@ print("\n\n")
 
 print("Comparing execution times: ",end="")
 start_time = time()
-ct = from_dict("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras.txt", "RADIX") # 320140 palavras in CharacterTree.
+ct = from_dict("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras.txt", "CHARACTER") # 320140 palavras in CharacterTree.
+rt = from_dict("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras.txt", "RADIX") # 320140 palavras in CharacterTree.
 elapsed = time() - start_time
 print("{}".format(str(elapsed)))
 
@@ -61,7 +62,9 @@ print("{}".format(str(elapsed)))
 #			"D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras_sample1.txt")
 
 #wrong_words = ct.check("./texts/A-Caravana-de-Veneza.txt")
-#wrong_words = ct.check("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras_sample1.txt")
+
+ct_wrong_words = ct.check("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras_sample.txt")
+rt_wrong_words = rt.check("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras_sample.txt")
 
 #print("low_memory=True:",end="")
 #start_time = time()
