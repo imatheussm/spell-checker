@@ -28,7 +28,7 @@ class RadixTree(Radix):
 			if tree==None:
 				#print("No tree was defined. Defining tree to be self...")
 				tree = self
-			#else: print("tree = {} | word: {}".format(tree.radix,word))
+			#else: print("tree = {} | word: {}".format(tree.radix,other))
 			if len(other) > 0:
 				if len(tree.next_radices)>0:
 					#print("There are children! Analyzing one-by-one...")
@@ -37,20 +37,21 @@ class RadixTree(Radix):
 						try:
 							for i in range(len(next_radix.radix)):
 								if next_radix.radix[i] != other[i]:
-									continue
+									break
 								else:
 									if i == len(next_radix.radix)-1: return self.__contains__(other[i+1:],next_radix)
 						except IndexError:
 							continue
-					#print("None of the words are related! Appending...")
+					#print("None of the words are related! Returning False.")
 					return False
 				else:
-					#print("There are no children! Appending...")
+					#print("There are no children! Returning False.")
 					return False
 			else:
-				#print("Word processed!")
+				#print("Word processed! Returning .is_final.")
 				return tree.is_final
 		else:
+			#print("The other parameter is not a string object! Returning False.")
 			return False
 
 	def __init__(self,*args):
@@ -91,6 +92,27 @@ class RadixTree(Radix):
 		"""
 		return "<RadixTree object>\n{} words loaded.\nAvailable Initial Characters: {}".format(self.loaded_words,
 																								   ", ".join([radix.radix for radix in self.next_radices]))
+
+	def check(self,path):
+		"""Checks a text for mis-spellings.
+
+		Parameters
+		----------
+		self : RadixTree
+			A RadixTree object.
+		path : str (path)
+			The path to the file to be spell-checked.
+
+		Returns
+		-------
+		tuple
+			A tuple containing all the unknown words.
+		"""
+		with open(path, "r", encoding="utf-8") as file:
+			misspellings = []
+			for word in [line.strip("\n").split(" ") for line in file.readlines()]:
+				if word[0] not in self: misspellings.append(word)
+		return misspellings
 
 	def find_radix(self,radix,tree):
 		"""Finds a radix and returns its index.
