@@ -28,7 +28,7 @@ def sample_file(path,new_path,percentage=.20):
 		for item in sample: file.write(item)
 
 a = CharacterTree("abacate","mamão","maniçoba","queijo")
-print("Árvore criada com as palavras \"abacate\", \"mamão\",\"maniçoba\" e \"queijo\" nela.")
+print("CharacterTree criada com as palavras \"abacate\", \"mamão\",\"maniçoba\" e \"queijo\" nela.")
 print("Há maniçoba nela? Resposta: {}.".format("maniçoba" in a))
 print("Há abacate nela?  Resposta: {}.".format("abacate" in a))
 print("E aba?            Resposta: {}.".format("aba" in a))
@@ -42,7 +42,18 @@ print(", ".join([character.character for character in a.next_characters]))
 
 print("\n\n")
 
-b = RadixTree("abacate","mamão","maniçoba","queijo","menino", "menina")
+b = RadixTree("abacate","mamão","maniçoba","queijo")
+print("RadixTree criada com as palavras \"abacate\", \"mamão\",\"maniçoba\" e \"queijo\" nela.")
+print("Há maniçoba nela? Resposta: {}.".format("maniçoba" in b))
+print("Há abacate nela?  Resposta: {}.".format("abacate" in b))
+print("E aba?            Resposta: {}.".format("aba" in b))
+print("Então, adicionemos aba.")
+b.insert("aba")
+print("A palavra aba adicionada.")
+print("Há aba na árvore? Resposta: {}.".format("aba" in b))
+print("Perfeito.")
+
+print(", ".join([character.character for character in a.next_characters]))
 # b.insert("menino")
 
 #print("Comparing execution times: ",end="")
