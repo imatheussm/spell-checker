@@ -38,19 +38,19 @@ def from_dict(data,type,tree=None,low_memory=True):
 	return tree
 
 def from_txt(data,type,tree=None):
-	"""Loads words into a CharacterTree from the text file provided.
+	"""Loads words into a CharacterTree or RadixTree object from the text file provided.
 
 	Parameters
 	----------
 	data : str (path)
 		The path to a text file containing words to be loaded into the CharacterTree to be returned.
 	character_tree : bool (default = None)
-		The CharacterTree object in which the words are meant to be loaded. If not provided, will create a new CharacterTree object.
+		The CharacterTree or RadixTree object in which the words are meant to be loaded. If not provided, will create a new CharacterTree object.
 
 	Returns
 	-------
-	CharacterTree
-		A CharacterTree object containing the loaded words.
+	CharacterTree, RadixTree
+		A CharacterTree or RadixTree object containing the loaded words.
 	"""
 	try: type = type.lower()
 	except: raise TypeError("The type parameter must be a string.")
