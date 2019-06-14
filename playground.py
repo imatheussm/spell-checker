@@ -42,16 +42,15 @@ print(", ".join([character.character for character in a.next_characters]))
 
 print("\n\n")
 
-#b = RadixTree("abacate","mamão","maniçoba","queijo","menino", "menina")
-# PROBLEM WITH COUNT OF WORDS
+b = RadixTree("abacate","mamão","maniçoba","queijo","menino", "menina")
 # b.insert("menino")
 
-print("Comparing execution times: ",end="")
-start_time = time()
-ct = from_dict("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras.txt", "CHARACTER") # 320140 palavras in CharacterTree.
-rt = from_dict("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras.txt", "RADIX") # 320140 palavras in CharacterTree.
-elapsed = time() - start_time
-print("{}".format(str(elapsed)))
+#print("Comparing execution times: ",end="")
+#start_time = time()
+#ct = from_dict("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras.txt", "CHARACTER") # 320140 palavras in CharacterTree.
+#rt = from_dict("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras.txt", "RADIX") # 320140 palavras in CharacterTree.
+#elapsed = time() - start_time
+#print("{}".format(str(elapsed)))
 
 #start_time = time()
 #constituicao = from_txt("D:/igor/OneDrive/Documentos/GitHub/spell-checker/texts/constituicao.txt")
@@ -63,8 +62,8 @@ print("{}".format(str(elapsed)))
 
 #wrong_words = ct.check("./texts/A-Caravana-de-Veneza.txt")
 
-ct_wrong_words = ct.check("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras_sample.txt")
-rt_wrong_words = rt.check("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras_sample.txt")
+#ct_wrong_words = ct.check("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras_sample.txt")
+#rt_wrong_words = rt.check("D:\igor\OneDrive\Documentos\GitHub\spell-checker\dictionaries\palavras_sample.txt")
 
 #print("low_memory=True:",end="")
 #start_time = time()
