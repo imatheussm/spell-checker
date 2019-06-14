@@ -37,7 +37,7 @@ def from_dict(data,type,tree=None,low_memory=True):
 			for word in [word.strip("\n") for word in file.readlines()]: tree.insert(word)
 	return tree
 
-def from_txt(data,character_tree=None):
+def from_txt(data,type,tree=None):
 	"""Loads words into a CharacterTree from the text file provided.
 
 	Parameters
@@ -52,8 +52,13 @@ def from_txt(data,character_tree=None):
 	CharacterTree
 		A CharacterTree object containing the loaded words.
 	"""
-	if character_tree == None: character_tree = CharacterTree()
-	elif not isinstance(character_tree,CharacterTree): raise TypeError("Parameter character_tree must be a CharacterTree object.")
+	try: type = type.lower()
+	except: raise TypeError("The type parameter must be a string.")
+	if type!="radix" and type!="character": raise ValueError("The available types are 'tree' and 'character'.")
+	if tree == None:
+		if type=="character": tree = CharacterTree()
+		else: tree = RadixTree()
+	elif not isinstance(tree,CharacterTree) and not isinstance(tree,RadixTree): raise TypeError("Parameter character_tree must be a CharacterTree object.")
 	with open (data,"r",encoding="utf-8") as file:
 		lines, words = [word.strip("\n") for word in file.readlines()], []
 		for line in lines:
@@ -61,9 +66,9 @@ def from_txt(data,character_tree=None):
 				word = ''.join(character for character in word if character not in punctuation)
 				#print(word)
 				if word.isalpha():
-					try: character_tree.insert(word)
+					try: tree.insert(word)
 					except: pass
-	return character_tree
+	return tree
 
 def word_generator(data,case_sensitive=True):
 	"""Word generator.
