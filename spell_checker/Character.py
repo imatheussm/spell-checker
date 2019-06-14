@@ -127,6 +127,7 @@ class Character:
 		str
 			The representation of the Character object, containing the aforementioned characteristics.
 		"""
+		self.next_characters.sort()
 		return "<Character object>\n         Character: {}\nPrevious Character: {}\n   Next Characters: {}".format(self.character,
 																												   self.previous_character,
 																												   ", ".join([character.character for character in self.next_characters]))

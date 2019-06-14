@@ -76,6 +76,7 @@ class CharacterTree(Character):
 		str
 			The string representation of the object.
 		"""
+		self.next_characters.sort()
 		return "<CharacterTree object>\n{} words loaded.\nAvailable Initial Characters: {}".format(self.loaded_words,
 																								   ", ".join([character.character for character in self.next_characters]))
 

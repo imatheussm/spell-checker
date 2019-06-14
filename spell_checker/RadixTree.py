@@ -90,6 +90,7 @@ class RadixTree(Radix):
 		str
 			The string representation of the object.
 		"""
+		self.next_radices.sort()
 		return "<RadixTree object>\n{} words loaded.\nAvailable Initial Characters: {}".format(self.loaded_words,
 																								   ", ".join([radix.radix for radix in self.next_radices]))
 

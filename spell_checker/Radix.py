@@ -161,6 +161,7 @@ class Radix:
 		str
 			The representation of the Character object, containing the aforementioned characteristics.
 		"""
+		self.next_radices.sort()
 		return "<Radix object>\nPrevious Radix: {}\n         Radix: {}\n  Next Radices: {}".format(self.previous_radix,
 																								   self.radix,
 																								   ", ".join([radix.radix for radix in self.next_radices]))
