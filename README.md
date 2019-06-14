@@ -16,7 +16,7 @@ More can be read in the Wikipedia page mentioned above.
 
 ### Trie Trees
 
-According to [Wikipedia](https://en.wikipedia.org/wiki/Trie), a **Trie Tree** is a kind of [search tree](https://en.wikipedia.org/wiki/Search_tree), which, on its turn, is "a tree data structure used for locating specific keys from within a set". According to Wikipedia, a Trie Tree can be also refeered to as Radix Trees or Prefix Trees – however, in the implementation seen in this repository, this is not the case: the CharacterTree class, which is a Trie Tree, only store a single character per Node, no matter what, while the RadixTree class stores radices whenever possible.
+According to [Wikipedia](https://en.wikipedia.org/wiki/Trie), a **Trie Tree** is a kind of [search tree](https://en.wikipedia.org/wiki/Search_tree), which, by its turn, is "a tree data structure used for locating specific keys from within a set". According to Wikipedia, a Trie Tree can be also refeered to as Radix Trees or Prefix Trees – however, in the implementation seen in this repository, this is not the case: the CharacterTree class, which is a Trie Tree, only store a single character per Node, no matter what, while the RadixTree class stores radices whenever possible.
 
 ### Radix Trees
 
