@@ -1,5 +1,4 @@
 from spell_checker.Radix import *
-from spell_checker.misc import get_radices
 
 class RadixTree(Radix):
 	"""Tree of letters, where each path, if final, represents a word.
