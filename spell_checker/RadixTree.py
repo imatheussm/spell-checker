@@ -16,6 +16,8 @@ class RadixTree(Radix):
 			A CharacterTree object.
 		other : str
 			A string (word) whose existance in the CharacterTree is to be checked.
+		tree : Radix, NoneType (default = None)
+			Due to the recursive nature of this method, this keyworded attribute is employed in the recursive call. If left with the default value, the object itself will be set as tree.
 
 		Returns
 		-------
@@ -66,7 +68,7 @@ class RadixTree(Radix):
 		Returns
 		-------
 		RadixTree
-			A RadixTree object, containing the elements provided in *args as possible words (if any).
+			A RadixTree object containing the elements provided in *args as possible words (if any).
 		"""
 		super().__init__('*')
 		self.is_final = True
@@ -114,28 +116,6 @@ class RadixTree(Radix):
 				if word[0] not in self: misspellings.append(word)
 		return misspellings
 
-	def find_radix(self,radix,tree):
-		"""Finds a radix and returns its index.
-
-		Parameters
-		----------
-		self : RadixTree
-			A RadixTree object.
-		radix : str
-			The radix to be found
-		tree : RadixTree
-			The RadixTree object where the search will take place.
-
-		Returns
-		-------
-		int
-			The index of the radix in the tree.next_radices array. Returns -1 if not found.
-		"""
-		if not isinstance(tree,RadixTree): raise TypeError("The tree parameter must be of type RadixTree.")
-		for i in range(len(tree.next_characters)):
-			if radix in tree.next_characters[i]: return i
-		return -1
-
 	def insert(self,word,tree=None):
 		"""Inserts a word in the CharacterTree.
 
@@ -147,16 +127,8 @@ class RadixTree(Radix):
 			A CharacterTree object.
 		word : str
 			The word string to be added. A ValueError will be raised if other object type is provided.
-
-		To-do
-		-----
-		Find the radix in the tree:
-			If found, will call recursively the method, with the remaining suffix.
-			If not, will check the length of the remaining word:
-				If len(word)>0, will add the remaining word under a Character object.
-				Else, will verify if the word is final:
-					If it is, do nothing.
-					Else, set is_final to True.
+		tree : Radix, NoneType (default = None)
+			Due to the recursive nature of this method, this keyworded attribute is employed in the recursive call. If left with the default value, the object itself will be set as tree.
 
 		"""
 		if not isinstance(word,str): raise TypeError("Only strings can be added to CharacterTree objects.")
@@ -228,8 +200,10 @@ class RadixTree(Radix):
 		----------
 		self : RadixTree
 			A RadixTree object.
-		other : str
+		word : str
 			A string (word) whose existance in the RadixTree is to be checked.
+		tree : Radix (default = None)
+			Due to the recursive nature of this method, this keyworded attribute is employed in the recursive call. If left with the default value, the object itself will be set as tree.
 		"""
 		if isinstance(word,str):
 			#Finding the radix in the Tree among all the possibilities
