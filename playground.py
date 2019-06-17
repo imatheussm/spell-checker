@@ -42,7 +42,8 @@ print(", ".join([character.character for character in a.next_characters]))
 
 print("\n\n")
 
-b = RadixTree("abacate","mamão","maniçoba","queijo")
+#b = RadixTree("abacate","mamão","maniçoba","queijo")
+b = RadixTree("aba", "abacate", "abacateiro", "abacateirozeiro")
 print("RadixTree criada com as palavras \"abacate\", \"mamão\",\"maniçoba\" e \"queijo\" nela.")
 print("Há maniçoba nela? Resposta: {}.".format("maniçoba" in b))
 print("Há abacate nela?  Resposta: {}.".format("abacate" in b))
