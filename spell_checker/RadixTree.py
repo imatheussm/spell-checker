@@ -241,6 +241,7 @@ class RadixTree(Radix):
 						elif len(tree.next_radices)==1:
 							#print("len(tree.next_radices)==1. Merging {} with {}...".format(tree.radix,tree.next_radices[0].radix))
 							tree.radix += tree.next_radices[0].radix
+							tree.next_radices += tree.next_radices[0].next_radices
 							tree.is_final = True
 							tree.next_radices = tree.next_radices[1:]
 						else: break
