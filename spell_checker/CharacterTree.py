@@ -24,6 +24,7 @@ class CharacterTree(Character):
 			The result of the verification.
 		"""
 		if isinstance(other,str):
+			if other == "": True
 			pointer = self
 			for letter in other:
 				if letter in pointer.next_characters: pointer = pointer.next_characters[pointer.next_characters.index(letter)]
@@ -123,7 +124,7 @@ class CharacterTree(Character):
 			else:
 				pointer.next_characters.append(Character(letter,pointer))
 				for index in range(len(pointer.next_characters)):
-					if pointer.next_characters[index].character==letter:
+					if pointer.next_characters[index].character == letter:
 						pointer = pointer.next_characters[index]
 						break
 		if pointer.is_final == False:
@@ -148,7 +149,7 @@ class CharacterTree(Character):
 		for letter in word:
 			if letter in pointer.next_characters: pointer = pointer.next_characters[pointer.next_characters.index(letter)]
 			else: raise ValueError("This word is not contained in this CharacterTree.")
-		if pointer.is_final==True: pointer.is_final = False
+		if pointer.is_final == True: pointer.is_final = False
 		else: raise ValueError("This word is not contained in this CharacterTree.")
 		if len(pointer.next_characters) == 0:
 			while not pointer.is_final:

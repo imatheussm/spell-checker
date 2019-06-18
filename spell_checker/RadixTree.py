@@ -26,13 +26,14 @@ class RadixTree(Radix):
 		"""
 		if isinstance(other,str):
 			#Finding the radix in the Tree among all the possibilities
-			if tree==None:
-				#print("No tree was defined. Defining tree to be self...")
+			if tree == None:
+				#print("No tree was defined.  Defining tree to be self...")
 				tree = self
 			#else: print("tree = {} | word: {}".format(tree.radix,other))
+			if other == "": return True
 			if len(other) > 0:
-				if len(tree.next_radices)>0:
-					#print("There are children! Analyzing one-by-one...")
+				if len(tree.next_radices) > 0:
+					#print("There are children!  Analyzing one-by-one...")
 					for next_radix in tree.next_radices:
 						#print("Current radix: {}".format(next_radix.radix))
 						try:
@@ -40,19 +41,19 @@ class RadixTree(Radix):
 								if next_radix.radix[i] != other[i]:
 									break
 								else:
-									if i == len(next_radix.radix)-1: return self.__contains__(other[i+1:],next_radix)
+									if i == len(next_radix.radix) - 1: return self.__contains__(other[i + 1:],next_radix)
 						except IndexError:
 							continue
-					#print("None of the words are related! Returning False.")
+					#print("None of the words are related!  Returning False.")
 					return False
 				else:
-					#print("There are no children! Returning False.")
+					#print("There are no children!  Returning False.")
 					return False
 			else:
-				#print("Word processed! Returning .is_final.")
+				#print("Word processed!  Returning .is_final.")
 				return tree.is_final
 		else:
-			#print("The other parameter is not a string object! Returning False.")
+			#print("The other parameter is not a string object!  Returning False.")
 			return False
 
 	def __init__(self,*args):
@@ -135,26 +136,28 @@ class RadixTree(Radix):
 		for i in list(range(10)) + ["*"]:
 			if str(i) in word: raise ValueError("Non-allowed characters were found in the word. Did your word contain any number or \"*\" as a character?")
 		#Finding the radix in the Tree among all the possibilities
-		if tree==None:
-			#print("No tree was defined. Defining tree to be self...")
+		if tree == None:
+			#print("No tree was defined.  Defining tree to be self...")
 			tree = self
 		#else: print("tree = {} | word: {}".format(tree.radix,word))
 		if len(word) > 0:
-			if len(tree.next_radices)>0:
-				#print("There are children! Analyzing one-by-one...")
+			if len(tree.next_radices) > 0:
+				#print("There are children!  Analyzing one-by-one...")
 				for next_radix in tree.next_radices:
 					#print("Current radix: {}".format(next_radix.radix))
 					try:
 						for i in range(len(next_radix.radix)):
 							if next_radix.radix[i] != word[i]:
 								#print("{} is not equal to {}!".format(next_radix.radix[i],word[i]))
-								if i==0: break
+								if i == 0: break
 								else:
-									if len(word[i:])>0:
-										#print("There's a relation, but there's a suffix! Calling .insert()...\n")
+									if len(word[i:]) > 0:
+										#print("There's a relation, but there's a suffix!  Calling
+										#.insert()...\n")
 										new_next_radices = next_radix.next_radices
 										#print("new_next_radices: {}".format(new_next_radices))
-										#print("new Radix object:\n{}".format(Radix(next_radix.radix[i:],next_radix,new_next_radices).__repr__()))
+										#print("new Radix
+										#object:\n{}".format(Radix(next_radix.radix[i:],next_radix,new_next_radices).__repr__()))
 										next_radix.next_radices = [Radix(next_radix.radix[i:],next_radix,new_next_radices)]
 										next_radix.radix = word[:i]
 										next_radix.is_final = False
@@ -166,12 +169,14 @@ class RadixTree(Radix):
 											next_radix.is_final = True
 											self.loaded_words += 1
 							else:
-								if i == len(next_radix.radix)-1: return self.insert(word[i+1:],next_radix)
+								if i == len(next_radix.radix) - 1: return self.insert(word[i + 1:],next_radix)
 					except IndexError:
-						#print("The word {} is contained in {}! Making proper adjustments...\n".format(word,next_radix.radix))
+						#print("The word {} is contained in {}!  Making proper
+						#adjustments...\n".format(word,next_radix.radix))
 						new_next_radices = next_radix.next_radices
 						#print("new_next_radices: {}".format(new_next_radices))
-						#print("new Radix object:\n{}".format(Radix(next_radix.radix[i:],next_radix,new_next_radices).__repr__()))
+						#print("new Radix
+						#object:\n{}".format(Radix(next_radix.radix[i:],next_radix,new_next_radices).__repr__()))
 						next_radix.next_radices = [Radix(next_radix.radix[i:],next_radix,new_next_radices)]
 						next_radix.radix = word
 						del(new_next_radices)
@@ -180,11 +185,11 @@ class RadixTree(Radix):
 						#if tree.is_final == False:
 						#	tree.is_final = True
 						#	self.loaded_words += 1
-				#print("None of the words are related! Appending...")
+				#print("None of the words are related!  Appending...")
 				tree.next_radices.append(Radix(word,tree))
 				self.loaded_words += 1
 			else:
-				#print("There are no children! Appending...")
+				#print("There are no children!  Appending...")
 				tree.next_radices.append(Radix(word,tree))
 				self.loaded_words += 1
 		else:
@@ -207,13 +212,13 @@ class RadixTree(Radix):
 		"""
 		if isinstance(word,str):
 			#Finding the radix in the Tree among all the possibilities
-			if tree==None:
-				#print("No tree was defined. Defining tree to be self...")
+			if tree == None:
+				#print("No tree was defined.  Defining tree to be self...")
 				tree = self
 			#else: print("tree = {} | word: {}".format(tree.radix,word))
 			if len(word) > 0:
-				if len(tree.next_radices)>0:
-					#print("There are children! Analyzing one-by-one...")
+				if len(tree.next_radices) > 0:
+					#print("There are children!  Analyzing one-by-one...")
 					for next_radix in tree.next_radices:
 						#print("Current radix: {}".format(next_radix.radix))
 						try:
@@ -221,7 +226,7 @@ class RadixTree(Radix):
 								if next_radix.radix[i] != word[i]:
 									break
 								else:
-									if i == len(next_radix.radix)-1: return self.remove(word[i+1:],next_radix)
+									if i == len(next_radix.radix) - 1: return self.remove(word[i + 1:],next_radix)
 						except IndexError:
 							continue
 					raise ValueError("The word does not exist.")
@@ -229,17 +234,18 @@ class RadixTree(Radix):
 					raise ValueError("The word does not exist.")
 			else:
 				if tree.is_final == True:
-					#print("{} is in the RadixTree! Removing...".format(word))
+					#print("{} is in the RadixTree!  Removing...".format(word))
 					previous_radix = tree.previous_radix
 					tree.is_final = False
 					self.loaded_words -= 1
 					while tree.is_final == False and tree.radix != "*":
 						#print("Attempting to optimize RadixTree...")
-						if len(tree.next_radices)==0:
-							#print("len(tree.next_radices)==0. Removing {}...".format(tree.radix))
+						if len(tree.next_radices) == 0:
+							#print("len(tree.next_radices)==0.  Removing {}...".format(tree.radix))
 							previous_radix.next_radices.remove(tree)
-						elif len(tree.next_radices)==1:
-							#print("len(tree.next_radices)==1. Merging {} with {}...".format(tree.radix,tree.next_radices[0].radix))
+						elif len(tree.next_radices) == 1:
+							#print("len(tree.next_radices)==1.  Merging {} with
+							#{}...".format(tree.radix,tree.next_radices[0].radix))
 							tree.radix += tree.next_radices[0].radix
 							tree.next_radices += tree.next_radices[0].next_radices
 							tree.is_final = True
