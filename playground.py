@@ -27,6 +27,20 @@ def sample_file(path,new_path,percentage=.20):
 	with open(new_path,"w",encoding="utf-8") as file:
 		for item in sample: file.write(item)
 
+def shuffle_file(path,new_path):
+	"""Randomly reorders the lines of a file and writes the result into another file.
+
+	Parameters
+	----------
+	path : str (path)
+		The path to the file whose lines are to be randomized.
+	new_path : str (path)
+		The path in which to write the file with the already-randomized lines.
+	"""
+	with open(path,'r') as source: data = sorted([(random(), line) for line in source])
+	with open(new_path,'w') as target:
+		for _, line in data: target.write(line)
+
 a = CharacterTree("abacate","mamão","maniçoba","queijo")
 print("CharacterTree criada com as palavras \"abacate\", \"mamão\",\"maniçoba\" e \"queijo\" nela.")
 print("Há maniçoba nela? Resposta: {}.".format("maniçoba" in a))
