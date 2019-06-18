@@ -154,6 +154,7 @@ class CharacterTree(Character):
 		if len(pointer.next_characters) == 0:
 			while not pointer.is_final:
 				previous_pointer = pointer.previous_character
-				previous_character.next_characters.remove(pointer)
+				# CHANGED FROM previous_character TO previous_pointer. NEEDS TO BE TESTED
+				previous_pointer.next_characters.remove(pointer)
 				pointer = previous_pointer
 		self.loaded_words-=1
