@@ -229,9 +229,9 @@ class RadixTree(Radix):
 									if i == len(next_radix.radix) - 1: return self.remove(word[i + 1:],next_radix)
 						except IndexError:
 							continue
-					raise ValueError("The word does not exist.")
+					raise ValueError("The word {} is not contained in this RadixTree.".format(word))
 				else:
-					raise ValueError("The word does not exist.")
+					raise ValueError("The word {} is not contained in this RadixTree.".format(word))
 			else:
 				if tree.is_final == True:
 					#print("{} is in the RadixTree!  Removing...".format(word))
