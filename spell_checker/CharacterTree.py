@@ -148,7 +148,7 @@ class CharacterTree(Character):
 		pointer = self
 		for letter in word:
 			if letter in pointer.next_characters: pointer = pointer.next_characters[pointer.next_characters.index(letter)]
-			else: raise ValueError("This word is not contained in this CharacterTree.")
+			else: raise ValueError("The word {} is not contained in this CharacterTree.".format(word))
 		if pointer.is_final == True: pointer.is_final = False
 		else: raise ValueError("The word {} is not contained in this CharacterTree.".format(word))
 		if len(pointer.next_characters) == 0:
