@@ -151,10 +151,9 @@ class CharacterTree(Character):
 			else: raise ValueError("The word {} is not contained in this CharacterTree.".format(word))
 		if pointer.is_final == True: pointer.is_final = False
 		else: raise ValueError("The word {} is not contained in this CharacterTree.".format(word))
-		if len(pointer.next_characters) == 0:
-			while not pointer.is_final:
-				previous_pointer = pointer.previous_character
-				# CHANGED FROM previous_character TO previous_pointer. NEEDS TO BE TESTED
-				previous_pointer.next_characters.remove(pointer)
-				pointer = previous_pointer
+		while not pointer.is_final and len(pointer.next_characters)==0:
+			previous_pointer = pointer.previous_character
+			# CHANGED FROM previous_character TO previous_pointer. NEEDS TO BE TESTED
+			previous_pointer.next_characters.remove(pointer)
+			pointer = previous_pointer
 		self.loaded_words-=1
