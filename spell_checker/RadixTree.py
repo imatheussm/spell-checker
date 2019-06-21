@@ -161,6 +161,7 @@ class RadixTree(Radix):
 										next_radix.next_radices = [Radix(next_radix.radix[i:],next_radix,new_next_radices)]
 										next_radix.radix = word[:i]
 										next_radix.is_final = False
+										for radix in new_next_radices: radix.previous_radix = next_radix.next_radices[0]
 										del(new_next_radices)
 										return self.insert(word[i:],next_radix)
 									else:
@@ -171,14 +172,14 @@ class RadixTree(Radix):
 							else:
 								if i == len(next_radix.radix) - 1: return self.insert(word[i + 1:],next_radix)
 					except IndexError:
-						#print("The word {} is contained in {}!  Making proper
-						#adjustments...\n".format(word,next_radix.radix))
+						#print("The word {} is contained in {}!  Making proper adjustments...\n".format(word,next_radix.radix))
 						new_next_radices = next_radix.next_radices
 						#print("new_next_radices: {}".format(new_next_radices))
 						#print("new Radix
 						#object:\n{}".format(Radix(next_radix.radix[i:],next_radix,new_next_radices).__repr__()))
 						next_radix.next_radices = [Radix(next_radix.radix[i:],next_radix,new_next_radices)]
 						next_radix.radix = word
+						for radix in new_next_radices: radix.previous_radix = next_radix.next_radices[0]
 						del(new_next_radices)
 						self.loaded_words += 1
 						return
@@ -223,36 +224,29 @@ class RadixTree(Radix):
 						#print("Current radix: {}".format(next_radix.radix))
 						try:
 							for i in range(len(next_radix.radix)):
-								if next_radix.radix[i] != word[i]:
-									break
-								else:
-									if i == len(next_radix.radix) - 1: return self.remove(word[i + 1:],next_radix)
-						except IndexError:
-							continue
+								if next_radix.radix[i] != word[i]: break
+								elif i == len(next_radix.radix) - 1: return self.remove(word[i + 1:],next_radix)
+						except IndexError: continue
 					raise ValueError("The word {} is not contained in this RadixTree.".format(word))
-				else:
-					raise ValueError("The word {} is not contained in this RadixTree.".format(word))
+				else: raise ValueError("The word {} is not contained in this RadixTree.".format(word))
 			else:
 				if tree.is_final == True:
-					#print("{} is in the RadixTree!  Removing...".format(word))
-					previous_radix = tree.previous_radix
-					tree.is_final = False
+					#print("{} is in the RadixTree! Removing...".format(word))
+					previous_radix, tree.is_final = tree.previous_radix, False
 					self.loaded_words -= 1
 					while tree.is_final == False and tree.radix != "*":
 						#print("Attempting to optimize RadixTree...")
 						if len(tree.next_radices) == 0:
-							#print("len(tree.next_radices)==0.  Removing {}...".format(tree.radix))
+							#print("len(tree.next_radices)==0. Removing {}...".format(tree.radix))
 							previous_radix.next_radices.remove(tree)
 						elif len(tree.next_radices) == 1:
-							#print("len(tree.next_radices)==1.  Merging {} with
-							#{}...".format(tree.radix,tree.next_radices[0].radix))
+							#print("len(tree.next_radices)==1. Merging {} with {}...".format(tree.radix,tree.next_radices[0].radix))
 							tree.radix += tree.next_radices[0].radix
 							tree.next_radices += tree.next_radices[0].next_radices
-							tree.is_final = True
-							tree.next_radices = tree.next_radices[1:]
+							tree.is_final, tree.next_radices = True, tree.next_radices[1:]
+							for radix in tree.next_radices:
+								radix.previous_radix = tree
 						else: break
-						tree = previous_radix
-						previous_radix = tree.previous_radix
+						tree, previous_radix = previous_radix, tree.previous_radix
 
-		else:
-			raise TypeError("The other parameter is not a string object.")
+		else: raise TypeError("The other parameter is not a string object.")
