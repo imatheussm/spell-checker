@@ -41,35 +41,59 @@ def shuffle_file(path,new_path):
 	with open(new_path,'w') as target:
 		for _, line in data: target.write(line)
 
-a = CharacterTree("abacate","mamão","maniçoba","queijo")
-print("CharacterTree criada com as palavras \"abacate\", \"mamão\",\"maniçoba\" e \"queijo\" nela.")
-print("Há maniçoba nela? Resposta: {}.".format("maniçoba" in a))
-print("Há abacate nela?  Resposta: {}.".format("abacate" in a))
-print("E aba?            Resposta: {}.".format("aba" in a))
-print("Então, adicionemos aba.")
-a.insert("aba")
-print("A palavra aba adicionada.")
-print("Há aba na árvore? Resposta: {}.".format("aba" in a))
-print("Perfeito.")
+def dict_to_list(path):
+	"""Converts a dictionary file (one word per line) into a Python list object.
 
-print(", ".join([character.character for character in a.next_characters]))
+	Parameters
+	----------
+	path : str (path)
+		The path to the dictionary file to be transformed into a Python list object.
 
-print("\n\n")
+	Returns
+	-------
+	list
+		A list where each item is a single word.
+	"""
+	with open(path, "r", encoding="utf-8") as file:
+		return [line.strip("\n") for line in file.readlines()]
+
+#a = CharacterTree("abacate","mamão","maniçoba","queijo")
+#print("CharacterTree criada com as palavras \"abacate\", \"mamão\",\"maniçoba\" e \"queijo\" nela.")
+#print("Há maniçoba nela? Resposta: {}.".format("maniçoba" in a))
+#print("Há abacate nela?  Resposta: {}.".format("abacate" in a))
+#print("E aba?            Resposta: {}.".format("aba" in a))
+#print("Então, adicionemos aba.")
+#a.insert("aba")
+#print("A palavra aba adicionada.")
+#print("Há aba na árvore? Resposta: {}.".format("aba" in a))
+#print("Perfeito.")
+#
+#print(", ".join([character.character for character in a.next_characters]))
+#
+#print("\n\n")
 
 #b = RadixTree("abacate","mamão","maniçoba","queijo")
-b = RadixTree("aba", "abacate", "abacateiro", "abacateirozeiro")
-print("RadixTree criada com as palavras \"abacate\", \"mamão\",\"maniçoba\" e \"queijo\" nela.")
-print("Há maniçoba nela? Resposta: {}.".format("maniçoba" in b))
-print("Há abacate nela?  Resposta: {}.".format("abacate" in b))
-print("E aba?            Resposta: {}.".format("aba" in b))
-print("Então, adicionemos aba.")
-b.insert("aba")
-print("A palavra aba adicionada.")
-print("Há aba na árvore? Resposta: {}.".format("aba" in b))
-print("Perfeito.")
+#b = RadixTree("aba", "abacate", "abacateiro", "abacateirozeiro")
+#print("RadixTree criada com as palavras \"abacate\", \"mamão\",\"maniçoba\" e \"queijo\" nela.")
+#print("Há maniçoba nela? Resposta: {}.".format("maniçoba" in b))
+#print("Há abacate nela?  Resposta: {}.".format("abacate" in b))
+#print("E aba?            Resposta: {}.".format("aba" in b))
+#print("Então, adicionemos aba.")
+#b.insert("aba")
+#print("A palavra aba adicionada.")
+#print("Há aba na árvore? Resposta: {}.".format("aba" in b))
+#print("Perfeito.")
 
-print(", ".join([character.character for character in a.next_characters]))
+#print(", ".join([character.character for character in a.next_characters]))
 # b.insert("menino")
+
+
+rt = from_dict("./dictionaries/palavras.txt","RADIX")
+words_to_remove = dict_to_list("./dictionaries/palavras2.txt")
+print("OK")
+for word_to_remove in words_to_remove:
+	print(word_to_remove)
+	rt.remove(word_to_remove)
 
 #print("Comparing execution times: ",end="")
 #start_time = time()
