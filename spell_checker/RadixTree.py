@@ -1,9 +1,7 @@
 from spell_checker.Radix import *
 
 class RadixTree(Radix):
-	"""Tree of letters, where each path, if final, represents a word.
-
-	Originally named WordTree (and then LetterTree), its name was changed because, in spite of representing words (or their non-existence), at the end of the day it comes down to a mere hierarchy of characters.
+	"""Tree of radices, where each path, if final, represents a word.
 	"""
 	def __contains__(self,other,tree=None):
 		"""Checks if a word is contained in the CharacterTree.

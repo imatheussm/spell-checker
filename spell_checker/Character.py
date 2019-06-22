@@ -3,6 +3,7 @@ class Character:
 
 	Contains references to the sons (if any) and the father. The paths are the existing words.
 	"""
+
 	def __eq__(self,other):
 		"""Checks if two Character objects contain the same characters (and previous and next as well).
 

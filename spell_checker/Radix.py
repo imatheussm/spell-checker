@@ -1,7 +1,10 @@
 from spell_checker.Character import *
 
 class Radix:
-	""""""
+	"""Node of the dictionary tree.
+
+	Contains references to the sons (if any) and the father. The paths are the existing radices.
+	"""
 	def __contains__(self,other):
 		"""Checks if the radix held by the Radix object is equal to the string provided.
 
